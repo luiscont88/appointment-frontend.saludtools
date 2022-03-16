@@ -1,0 +1,15 @@
+.bouton-image:before {
+    content: "";
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    vertical-align: text-top;
+}
+
+.monBouton:before{
+     background-image : url("../../assets/refresh-icon.png") !important;
+}
+
+.plusBouton:before{
+    background-image : url("../../assets/add-icon.png") !important;
+}

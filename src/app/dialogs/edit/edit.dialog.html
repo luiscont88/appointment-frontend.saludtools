@@ -1,0 +1,52 @@
+<div class="container">
+  <h3 mat-dialog-title>Editar cita: {{data.appointmentType}}</h3>
+
+  <form class="mat-dialog-content" (ngSubmit)="submit" #formControl="ngForm">
+
+    <!--Textarea for demo purposes-->
+    <div class="form">
+      <mat-form-field color="accent">
+        <input matInput #inputstate class="form-control" placeholder="Nombre(s)" name="patientName" maxlength="30" value="{{data.patientName}}" disabled required>
+        <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+      </mat-form-field>
+    </div>
+
+    <!--Contains mat-hint for characters count and has maxLengt set-->
+    <div class="form">
+      <mat-form-field color="accent">
+        <input matInput #inputstate class="form-control" placeholder="Apellido(s)" name="patientLastname" maxlength="30" value="{{data.patientLastname}}" disabled required >
+        <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+        <mat-hint>{{inputstate.value?.length || 0}}/30</mat-hint>
+      </mat-form-field>
+    </div>
+
+    <label style="color: darkgrey; font-size: 13px; margin-bottom: -10px;">Especialista</label>
+    <div class="form">
+        <select name="appointmentTypes" class="form-control" [(ngModel)]="data.appointmentTypeId" required>
+          <option [value]="appointmentType.id" *ngFor="let appointmentType of appointmentTypes">{{appointmentType.appointmentTypeName}}</option>
+        </select>
+    </div>
+
+    <div class="form" style="margin-bottom: -5px;">
+      <mat-form-field color="accent">
+        <input matInput placeholder="Descripción" [(ngModel)]="data.appointmentDescription" name="appointmentDescription">
+      </mat-form-field>
+    </div>
+
+    <label style="color: darkgrey; font-size: 13px; margin-bottom: -10px;">Fecha de la cita</label>
+    <div class="form">
+      <div class="input-group">
+        <input class="form-control" placeholder="yyyy-mm-dd"
+               name="dp" [(ngModel)]="data.appointmentDate" ngbDatepicker #d="ngbDatepicker">
+        <div class="input-group-append">
+          <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+        </div>
+      </div>
+    </div>
+
+    <div mat-dialog-actions>
+      <button mat-button type="submit" [disabled]="!formControl.valid" [mat-dialog-close]="1" (click)="stopEdit()">Guardar</button>
+      <button mat-button (click)="onNoClick()" tabindex="-1">Cancelar</button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,37 @@
+<div id="app">
+  <nav class="navbar navbar-expand navbar-dark bg-primary">
+    <a class="navbar-brand" href="#">
+      <img src="../assets/saludtools-logo.png" width="40" height="40" alt="">
+    </a>
+    <ul class="navbar-nav mr-auto" routerLinkActive="active">
+      <li class="nav-item">
+        <a href="/home" class="navbar-brand" routerLink="home">Saludtools </a>
+        <a *ngIf="isLoggedIn" href="/appointments" class="btn btn-outline-light" routerLink="appointments">Lista de citas</a>
+      </li>
+    </ul>
+
+    <ul class="navbar-nav ml-auto" *ngIf="!isLoggedIn">
+      <li class="nav-item">
+        <a href="/register" class="btn btn-outline-light" routerLink="register">Regístrate</a>
+      </li>
+      <li class="nav-item">
+        <a href="/login" class="btn btn-outline-light" routerLink="login">Iniciar Sesión</a>
+      </li>
+    </ul>
+
+    <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
+      <li class="nav-item">
+        <span class="navbar-brand mb-0 h1" style="margin-right: 20px; font-size: 18px;">
+          {{ patientEmail }}
+        </span>
+      </li>
+      <li class="nav-item">
+        <button (click)="logout()" type="button" class="btn btn-outline-light">Cerrar Sesión</button>
+      </li>
+    </ul>
+  </nav>
+
+  <div class="container">
+    <router-outlet></router-outlet>
+  </div>
+</div>

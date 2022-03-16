@@ -1,0 +1,159 @@
+<div class="col-md-12">
+  <div class="card card-container">
+    <img
+      id="profile-img"
+      src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
+      class="profile-img-card"
+    />
+    <form
+      *ngIf="!isSuccessful"
+      name="form"
+      (ngSubmit)="f.form.valid && onSubmit()"
+      #f="ngForm"
+      novalidate
+    >
+
+      <div class="form-group">
+        <label for="patientName">Nombre(s)</label>
+        <input
+          type="text"
+          class="form-control"
+          name="patientName"
+          [(ngModel)]="form.patientName"
+          required
+          minlength="3"
+          maxlength="30"
+          #patientName="ngModel"
+        />
+        <div class="alert-danger" *ngIf="patientName.errors && f.submitted">
+          <div *ngIf="patientName.errors['required']">Nombre(s) es requerido.</div>
+          <div *ngIf="patientName.errors['minlength']">
+            El campo debe contener mínimo 3 caracteres.
+          </div>
+          <div *ngIf="patientName.errors['maxlength']">
+            El campo debe contener máximo 30 caracteres.
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="patientLastname">Apellido(s)</label>
+        <input
+          type="text"
+          class="form-control"
+          name="patientLastname"
+          [(ngModel)]="form.patientLastname"
+          required
+          minlength="3"
+          maxlength="30"
+          #patientLastname="ngModel"
+        />
+        <div class="alert-danger" *ngIf="patientLastname.errors && f.submitted">
+          <div *ngIf="patientLastname.errors['required']">Apellido(s) es requerido.</div>
+          <div *ngIf="patientLastname.errors['minlength']">
+            El campo debe contener mínimo 3 caracteres.
+          </div>
+          <div *ngIf="patientLastname.errors['maxlength']">
+            El campo debe contener máximo 30 caracteres.
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="patientAge">Edad</label>
+        <input
+          type="number"
+          class="form-control"
+          name="patientAge"
+          [(ngModel)]="form.patientAge"
+          required
+          minlength="1"
+          maxlength="2"
+          #patientAge="ngModel"
+        />
+        <div class="alert-danger" *ngIf="patientAge.errors && f.submitted">
+          <div *ngIf="patientAge.errors['required']">Edad es requerida.</div>
+          <div *ngIf="patientAge.errors['minlength']">
+            El campo debe contener mínimo 1 caracteres.
+          </div>
+          <div *ngIf="patientAge.errors['maxlength']">
+            El campo debe contener máximo 2 caracteres.
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="patientPhone">Teléfono</label>
+        <input
+          type="number"
+          class="form-control"
+          name="patientPhone"
+          [(ngModel)]="form.patientPhone"
+          required
+          minlength="1"
+          maxlength="12"
+          #patientPhone="ngModel"
+        />
+        <div class="alert-danger" *ngIf="patientPhone.errors && f.submitted">
+          <div *ngIf="patientPhone.errors['required']">Teléfono es requerido.</div>
+          <div *ngIf="patientPhone.errors['minlength']">
+            El campo debe contener mínimo 3 caracteres.
+          </div>
+          <div *ngIf="patientPhone.errors['maxlength']">
+            El campo debe contener máximo 30 caracteres.
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="patientEmail">Correo electrónico</label>
+        <input
+          type="patientEmail"
+          class="form-control"
+          name="patientEmail"
+          [(ngModel)]="form.patientEmail"
+          required
+          email
+          #patientEmail="ngModel"
+        />
+        <div class="alert-danger" *ngIf="patientEmail.errors && f.submitted">
+          <div *ngIf="patientEmail.errors['required']">Email is required</div>
+          <div *ngIf="patientEmail.errors['email']">
+            Email must be a valid email address
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="patientPassword">Contraseña</label>
+        <input
+          type="password"
+          class="form-control"
+          name="patientPassword"
+          [(ngModel)]="form.patientPassword"
+          required
+          minlength="6"
+          #patientPassword="ngModel"
+        />
+        <div class="alert-danger" *ngIf="patientPassword.errors && f.submitted">
+          <div *ngIf="patientPassword.errors['required']">Password is required</div>
+          <div *ngIf="patientPassword.errors['minlength']">
+            Password must be at least 6 characters
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <button class="btn btn-primary btn-block">Registrar</button>
+      </div>
+
+      <div class="alert alert-warning" *ngIf="f.submitted && isSignUpFailed">
+        Error al registrar!<br />{{ errorMessage }}
+      </div>
+    </form>
+
+    <div class="alert alert-success" *ngIf="isSuccessful">
+      Se ha registrado exitosamente!
+    </div>
+  </div>
+</div>
